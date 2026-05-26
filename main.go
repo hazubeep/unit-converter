@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"html/template"
+	"net/http"
+)
+
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/index.html"))
+
+	tmpl.Execute(w, nil)
+}
 
 func main() {
-	fmt.Println("Hello World")
+	http.HandleFunc("/", homeHandler)
+
+	http.ListenAndServe(":8080", nil)
 }

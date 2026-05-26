@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="../assets/style.css" rel="stylesheet" />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    form button {
+      padding: 15px;
+    }
+
+    .container {
+      border: 1px solid gray;
+      padding: 25px;
+    }
+
+    .logo {
+      font-size: 3rem;
+      color: #333;
+    }
+
+    .type {
+      display: flex;
+      margin-block: 25px;
+      column-gap: 35px;
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      margin-block: 15px;
+      color: #333;
+    }
+
+    .input-container label {
+      font-size: 1.5rem;
+    }
+
+    .input-container input,
+    select {
+      padding: 10px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1 class="logo">Unit Converter</h1>
+      <div class="type">
+        <a href="#">Lenght</a>
+        <a href="#">Weight</a>
+        <a href="#">Temperature</a>
+      </div>
+
+      <form action="#" target="_self">
+        <div class="input-container">
+          <label for="length">Enter the length to convert</label>
+          <input name="length" id="lenght" type="number" />
+        </div>
+
+        <div class="input-container">
+          <label for="convertFrom">Unit to convert from </label>
+          <select name="convertFrom" id="convertFrom">
+            <option value="milimeter">Milimeter</option>
+            <option value="kilometer">Kilometer</option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <label for="convertTo">Unit to convert to</label>
+          <select name="convertTo" id="convertTo">
+            <option value="milimeter">Milimeter</option>
+            <option value="kilometer">Kilometer</option>
+          </select>
+        </div>
+
+        <button type="submit">Convert</button>
+      </form>
+    </div>
+  </body>
+</html>
