@@ -1,18 +1,13 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
 )
 
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("templates/index.html"))
-
-	tmpl.Execute(w, nil)
-}
-
 func main() {
-	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/", LengthHandler)
+	http.HandleFunc("/weight", WeightHandler)
+	http.HandleFunc("/temperature", TemperatureHandler)
 
 	http.ListenAndServe(":8080", nil)
 }
