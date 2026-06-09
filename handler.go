@@ -63,7 +63,7 @@ func WeightHandler(w http.ResponseWriter, r *http.Request) {
 
 		v, _ := strconv.ParseFloat(value, 64)
 
-		convertedResult := ConvertLength(v, Unit(from), Unit(to))
+		convertedResult := ConvertWeight(v, WeightUnit(from), WeightUnit(to))
 
 		result := Result{
 			ValueBefore: value,
