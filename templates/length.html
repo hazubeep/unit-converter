@@ -1,5 +1,5 @@
 {{define "content"}} {{if .}}
-<form method="POST" enctype="application/x-www-form-urlencoded" target="_self">
+<form method="POST">
   <div>
     <h2>Result of your calculation</h2>
     <h3 class="result">{{.ValueBefore}} {{.From}} = {{.ValueAfter}} {{.To}}</h3>
@@ -7,7 +7,7 @@
   </div>
 </form>
 {{else}}
-<form method="POST" enctype="application/x-www-form-urlencoded" target="_self">
+<form method="POST">
   <div class="input-container">
     <label for="value">Enter the length to convert</label>
     <input name="value" id="value" type="number" placeholder="0" />
@@ -19,7 +19,7 @@
       <option value="Kilometer">Kilometer</option>
       <option value="Meter" selected>Meter</option>
       <option value="Centimeter">Centimeter</option>
-      <option value="Milimeter">Milimeter</option>
+      <option value="Millimeter">Millimeter</option>
     </select>
   </div>
 
@@ -29,7 +29,7 @@
       <option value="Kilometer" selected>Kilometer</option>
       <option value="Meter">Meter</option>
       <option value="Centimeter">Centimeter</option>
-      <option value="Milimeter">Milimeter</option>
+      <option value="Millimeter">Millimeter</option>
     </select>
   </div>
 

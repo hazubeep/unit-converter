@@ -7,6 +7,8 @@
 *.dll
 *.so
 *.dylib
+start
+unit-converter
 
 # Test binary, built with `go test -c`
 *.test

@@ -1,4 +1,4 @@
-package main
+package converter
 
 type WeightUnit string
 
