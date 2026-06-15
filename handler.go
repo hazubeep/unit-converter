@@ -25,7 +25,7 @@ func LengthHandler(w http.ResponseWriter, r *http.Request) {
 
 		v, err := strconv.ParseFloat(value, 64)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -52,7 +52,7 @@ func WeightHandler(w http.ResponseWriter, r *http.Request) {
 
 		v, err := strconv.ParseFloat(value, 64)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
@@ -81,7 +81,7 @@ func TemperatureHandler(w http.ResponseWriter, r *http.Request) {
 		v, err := strconv.ParseFloat(value, 64)
 
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
