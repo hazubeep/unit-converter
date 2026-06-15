@@ -15,11 +15,11 @@ Project reference: https://roadmap.sh/projects/unit-converter
 
 ## Supported Conversions
 
-| Category | Units |
-|----------|-------|
-| Length | meter, kilometer, centimeter, millimeter, decameter, hectometer |
-| Weight | kilogram, hectogram, decagram, gram, decigram, centigram, milligram |
-| Temperature | Celsius, Fahrenheit, Kelvin |
+| Category    | Units                                                               |
+| ----------- | ------------------------------------------------------------------- |
+| Length      | meter, kilometer, centimeter, millimeter, decameter, hectometer     |
+| Weight      | kilogram, hectogram, decagram, gram, decigram, centigram, milligram |
+| Temperature | Celsius, Fahrenheit, Kelvin                                         |
 
 ## Requirements
 
