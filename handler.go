@@ -1,6 +1,7 @@
 package main
 
 import (
+	"html/template"
 	"net/http"
 	"strconv"
 
@@ -14,84 +15,36 @@ type Result struct {
 	From        string
 }
 
-func LengthHandler(w http.ResponseWriter, r *http.Request) {
-	switch r.Method {
-	case http.MethodGet:
-		lengthTmpl.ExecuteTemplate(w, "layout", nil)
-	case http.MethodPost:
-		value := r.FormValue("value")
-		from := r.FormValue("from")
-		to := r.FormValue("to")
-
-		v, err := strconv.ParseFloat(value, 64)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		result := Result{
-			ValueBefore: value,
-			ValueAfter:  converter.ConvertLength(v, converter.LengthUnit(from), converter.LengthUnit(to)),
-			To:          to,
-			From:        from,
-		}
-
-		lengthTmpl.ExecuteTemplate(w, "layout", result)
-	}
+type Unit interface {
+	converter.LengthUnit | converter.WeightUnit | converter.TemperatureUnit
 }
 
-func WeightHandler(w http.ResponseWriter, r *http.Request) {
-	switch r.Method {
-	case http.MethodGet:
-		weightTmpl.ExecuteTemplate(w, "layout", nil)
+type ConvertFunc[U Unit] func(value float64, from, to U) float64
 
-	case http.MethodPost:
-		value := r.FormValue("value")
-		from := r.FormValue("from")
-		to := r.FormValue("to")
+func MakeHandler[U Unit](tmpl *template.Template, convert ConvertFunc[U]) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			tmpl.ExecuteTemplate(w, "layout", nil)
+		case http.MethodPost:
+			value := r.FormValue("value")
+			from := r.FormValue("from")
+			to := r.FormValue("to")
 
-		v, err := strconv.ParseFloat(value, 64)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
+			v, err := strconv.ParseFloat(value, 64)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusBadRequest)
+				return
+			}
+
+			result := Result{
+				ValueBefore: value,
+				ValueAfter:  convert(v, U(from), U(to)),
+				To:          to,
+				From:        from,
+			}
+
+			tmpl.ExecuteTemplate(w, "layout", result)
 		}
-
-		result := Result{
-			ValueBefore: value,
-			ValueAfter:  converter.ConvertWeight(v, converter.WeightUnit(from), converter.WeightUnit(to)),
-			To:          to,
-			From:        from,
-		}
-
-		weightTmpl.ExecuteTemplate(w, "layout", result)
-	}
-}
-
-func TemperatureHandler(w http.ResponseWriter, r *http.Request) {
-
-	switch r.Method {
-	case http.MethodGet:
-		temperatureTmpl.ExecuteTemplate(w, "layout", nil)
-
-	case http.MethodPost:
-		value := r.FormValue("value")
-		from := r.FormValue("from")
-		to := r.FormValue("to")
-
-		v, err := strconv.ParseFloat(value, 64)
-
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-
-		result := Result{
-			ValueBefore: value,
-			ValueAfter:  converter.ConvertTemperature(v, converter.TemperatureUnit(from), converter.TemperatureUnit(to)),
-			To:          to,
-			From:        from,
-		}
-
-		temperatureTmpl.ExecuteTemplate(w, "layout", result)
 	}
 }

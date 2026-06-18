@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+
+	"github.com/hazubeep/unit-converter/converter"
 )
 
 const port = ":8080"
@@ -32,8 +35,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	http.HandleFunc("/", LengthHandler)
-	http.HandleFunc("/weight", WeightHandler)
-	http.HandleFunc("/temperature", TemperatureHandler)
+	http.HandleFunc("/", MakeHandler(lengthTmpl, converter.ConvertLength))
+	http.HandleFunc("/weight", MakeHandler(weightTmpl, converter.ConvertWeight))
+	http.HandleFunc("/temperature", MakeHandler(temperatureTmpl, converter.ConvertTemperature))
+
+	fmt.Printf("server run at port %s", port)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
